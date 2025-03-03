@@ -15,7 +15,7 @@ const pages = Object.entries(import.meta.glob('./latihan/*.astro', { eager: true
 		{pages.map(page => {
 		  const pageUrlSplit = page.url.split("/");
 		  return (
-			<li><a href={page.url} class="capitalize text-base">{pageUrlSplit[pageUrlSplit.length - 1]}</a></li>
+			<li><a href={page.url} class="capitalize text-base hover:underline">{pageUrlSplit[pageUrlSplit.length - 1]}</a></li>
 		  );
 		})}
 	  </ul>
