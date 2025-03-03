@@ -1,11 +1,23 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pages = Object.entries(import.meta.glob('./latihan/*.astro', { eager: true }))
+  .map(([path, page]) => ({
+    url: path.replace('./latihan/', '/latihan/').replace('.astro', ''),
+  }))
+  .filter(page => page.url && page.url !== '/latihan');
 ---
 
 <Layout>
-	<Welcome />
+  <h1 class="text-4xl m-16">Hello World</h1>
+  <div class="flex border-red-400">
+	<ul class="text-justify list-disc list-inside max-w-screen mx-auto">
+		{pages.map(page => {
+		  const pageUrlSplit = page.url.split("/");
+		  return (
+			<li><a href={page.url} class="capitalize text-base">{pageUrlSplit[pageUrlSplit.length - 1]}</a></li>
+		  );
+		})}
+	  </ul>
+  </div>
 </Layout>
